@@ -23,7 +23,7 @@ ADD trilio.list /etc/apt/sources.list.d/
 RUN set -ex \
      && apt-get -y update
 
-RUN << EOI
+RUN <<EOI
      apt-get -y install zlib1g-dev libpython3-dev
      apt-get -y install libcurl4-openssl-dev libssl-dev python3-m2crypto libmysqlclient-dev qemu-utils libxml2-dev libxslt-dev
      apt-get -y install nfs-common swig python3-guestfs libguestfs-tools libvirt-daemon-system
