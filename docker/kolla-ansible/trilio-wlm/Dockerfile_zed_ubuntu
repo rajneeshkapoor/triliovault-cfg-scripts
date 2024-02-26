@@ -21,13 +21,17 @@ ADD trilio.list /etc/apt/sources.list.d/
 
 ## INSTALL REQUIRED PACKAGES
 RUN set -ex \
-     && apt-get -y update \
-     && apt-get -y install zlib1g-dev libpython3-dev \
-     && apt-get -y install libcurl4-openssl-dev libssl-dev python3-m2crypto libmysqlclient-dev qemu-utils libxml2-dev libxslt-dev \
-     && apt-get -y install nfs-common swig python3-guestfs libguestfs-tools libvirt-daemon-system \
-     && apt-get -y install python3-neutronclient python3-glanceclient \
-     && pip3 --no-cache-dir install --upgrade pip \
-     && apt-get clean -y
+     && apt-get -y update
+
+RUN << EOI
+     apt-get -y install zlib1g-dev libpython3-dev
+     apt-get -y install libcurl4-openssl-dev libssl-dev python3-m2crypto libmysqlclient-dev qemu-utils libxml2-dev libxslt-dev
+     apt-get -y install nfs-common swig python3-guestfs libguestfs-tools libvirt-daemon-system
+     apt-get -y install python3-neutronclient python3-glanceclient
+EOI
+
+RUN pip3 --no-cache-dir install --upgrade pip \
+ && apt-get clean -y
 
 # Installing TrilioVaultWLM packages
 RUN apt-get -o Dpkg::Options::="--force-confold" --force-yes -y install workloadmgr python3-workloadmgrclient python3-contegoclient python3-s3-fuse-plugin --allow-unauthenticated
