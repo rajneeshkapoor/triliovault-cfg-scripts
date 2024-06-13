@@ -22,7 +22,9 @@ RUN dnf config-manager \
   --enable rhceph-6-tools-for-rhel-9-x86_64-rpms
 
 ADD trilio.repo /etc/yum.repos.d/
-RUN dnf install --releasever 9.2 python3-tvault-horizon-plugin-el9 -y
+#RUN dnf install --releasever 9.2 python3-tvault-horizon-plugin-el9 -y
+ADD /root/RK/TEMP/python3-tvault-horizon-plugin-el9-6.0.1.dev2-6.0.noarch.rpm /root
+RUN dnf install --releasever 9.2 /root/python3-tvault-horizon-plugin-el9-6.0.1.dev2-6.0.noarch.rpm
 RUN dnf --releasever 9.2 -y update-minimal --security --sec-severity=Important --sec-severity=Critical
 RUN rm /etc/yum.repos.d/trilio.repo
 
